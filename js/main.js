@@ -223,6 +223,10 @@ search.addEventListener("input", () => {
 clearBtn.addEventListener("click", () => {
   document.querySelectorAll(".inputs").forEach((input) => {
     input.value = "";
+    invalidName.innerHTML = "";
+    invalidCategory.innerHTML = "";
+    invalidPrice.innerHTML = "";
+    invalidDescription.innerHTML = "";
     input.classList.remove("is-valid", "is-invalid");
   });
 });

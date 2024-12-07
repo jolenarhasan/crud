@@ -16,13 +16,13 @@ if (localStorage.getItem("products") != null) {
   products = JSON.parse(localStorage.getItem("products"));
   dispalyPrpducts();
 }
+const namepattern = /^[A-Z][a-z]{3,8}$/;
+const categoryPattern = /^[A-Z][a-z]{2,10}$/;
+const pricePattern = /^\d{1,3}(\.\d{1,3})?$/;
+const descriptionPattern = /^.{10,100}$/;
 addbtn.addEventListener("click", (e) => {
   e.preventDefault();
   let isValid = true;
-  const namepattern = /^[A-Z][a-z]{3,8}$/;
-  const categoryPattern = /^[A-Z][a-z]{2,10}$/;
-  const pricePattern = /^\d{1,3}(\.\d{1,3})?$/;
-  const descriptionPattern = /^.{10,100}$/;
 
   if (!namepattern.test(name.value)) {
     invalidName.innerHTML =
@@ -225,4 +225,49 @@ clearBtn.addEventListener("click", () => {
     input.value = "";
     input.classList.remove("is-valid", "is-invalid");
   });
+});
+
+name.addEventListener("blur", () => {
+  if (!namepattern.test(name.value)) {
+    invalidName.innerHTML =
+      "name must have a capital letter and 3-8 lowercase letters";
+    name.classList.add("is-invalid");
+  } else {
+    name.classList.add("is-valid");
+    name.classList.remove("is-invalid");
+    invalidName.innerHTML = "";
+  }
+});
+category.addEventListener("blur", () => {
+  if (!categoryPattern.test(category.value)) {
+    invalidCategory.innerHTML =
+      "category must have a capital letter and 2-10 lowercase letters";
+    category.classList.add("is-invalid");
+  } else {
+    category.classList.add("is-valid");
+    category.classList.remove("is-invalid");
+    invalidCategory.innerHTML = "";
+  }
+});
+price.addEventListener("blur", () => {
+  if (!pricePattern.test(price.value)) {
+    invalidPrice.innerHTML =
+      "Price must be a valid number (up to 3 digits, optionally with 3 decimal places";
+    price.classList.add("is-invalid");
+  } else {
+    price.classList.add("is-valid");
+    price.classList.remove("is-invalid");
+    invalidPrice.innerHTML = "";
+  }
+});
+description.addEventListener("blur", () => {
+  if (!descriptionPattern.test(description.value)) {
+    invalidDescription.innerHTML =
+      "Description must be between 10 and 100 characters.";
+    description.classList.add("is-invalid");
+  } else {
+    description.classList.add("is-valid");
+    description.classList.remove("is-invalid");
+    invalidDescription.innerHTML = "";
+  }
 });
